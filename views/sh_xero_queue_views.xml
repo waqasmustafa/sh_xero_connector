@@ -42,7 +42,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'quotation')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -60,7 +60,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'purchase_order')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -78,7 +78,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'invoice')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -96,7 +96,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'bills')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -114,7 +114,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'credit_note')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -132,7 +132,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'debit_note')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -150,7 +150,7 @@
         }</field>
         <field name="domain">[('queue_type', '=', 'journal')]</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="view_id" ref="sh_xero_connector.sh_xero_queue_tree"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
