@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sh_xero_log_view_tree" model="ir.ui.view">
+        <field name="name">sh.xero.log.view.tree</field>
+        <field name="model">sh.xero.log</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state=='success'" decoration-danger="state=='error'">
+                <field name="type_"/>
+                <field name="state" optional="show"/>
+                <field name="datetime"/>
+                <field name="failed_list" column_invisible="1"/>
+                <field name="error" optional="show"/>
+                <button name="send_logger" string="View More" invisible="failed_list in ('', False, None)" type="object" class="btn btn-primary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sh_xero_log_view_form" model="ir.ui.view">
+        <field name="name">sh.xero.log.view.form</field>
+        <field name="model">sh.xero.log</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="type_"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="datetime"/>
+                            <field name="error"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sh_xero_configuration_form" model='ir.ui.view'>
+        <field name="name">sh.xero.configuration.form</field>
+        <field name="model">sh.xero.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Xero Credentials">
+                <sheet>
+                    <h1>
+                        <field name="name" default_focus="1" placeholder="Name" required="1" readonly="received_code" />
+                    </h1>
+                    <group name="creds">
+                        <group>
+                            <!-- Invisible fields -->
+                            <field name="code" invisible="1" />
+                            <field name="received_code" invisible="1" />
+                            <!-- Visible fields -->
+                            <field name="client_id" required="1" password="1" readonly="received_code" />
+                            <field name="client_secret" required="1" password="1" readonly="received_code" />
+                        </group>
+                        <group>
+                            <field name="redirect_url" required="1" readonly="received_code" />
+                            <field name="company_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_company" readonly="received_code" />
+                        </group>
+                        <field name="link" widget="url" invisible="received_code" />
+                    </group>
+                    <notebook>
+                        <!-- ==================== Tax ==================== -->
+                        <page name="tax" string="Tax">
+                            <group>
+                                <group>
+                                    <field name="import_tax"/>
+                                    <field name="export_tax"/>
+                                    <field name="sh_tax_group_id" required="import_tax" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_tax"/>
+                                    <field name="auto_export_tax"/>
+                                </group>
+                            </group>
+                            <button name="submit_tax" string="Sync Tax" invisible="not (import_tax or export_tax)" type="object" class="btn btn-primary mt-2" />
+                        </page>
+                        <!-- ==================== Accounts ==================== -->
+                        <page name="account" string="Accounts">
+                            <group>
+                                <group>
+                                    <field name="import_account"/>
+                                    <field name="export_account"/>
+                                    <field name="default_res_partner_bank_id" options="{'no_create': True}"/>
+                                </group>
+                                <group>
+                                    <field name="auto_import_account"/>
+                                    <field name="auto_export_account"/>
+                                </group>
+                            </group>
+                            <button name="submit_account" string="Sync Account" invisible="not (import_account or export_account)" type="object" class="btn btn-primary mt-2" />
+                        </page>
+                        <!-- ==================== Contacts ==================== -->
+                        <page name="contact" string="Contacts">
+                            <group>
+                                <group>
+                                    <field name="import_contact"/>
+                                    <field name="export_contact"/>
+                                    <field name="last_sync_contact" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_contact"/>
+                                    <field name="auto_export_contact"/>
+                                </group>
+                            </group>
+                            <button name="submit_contact" string="Sync Contact" invisible="not (import_contact or export_contact)" type="object" class="btn btn-primary mt-2"/>
+                        </page>
+                        <!-- ==================== Products ==================== -->
+                        <page name="product" string="Products">
+                            <group>
+                                <group>
+                                    <field name="import_products"/>
+                                    <field name="export_products"/>
+                                    <field name="last_sync_products" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_products"/>
+                                    <field name="auto_export_products"/>
+                                </group>
+                            </group>
+                            <button name="submit_products" string="Sync Products" invisible="not (import_products or export_products)" type="object" class="btn btn-primary mt-2"/>
+                        </page>
+                        <!-- ==================== Quotations ==================== -->
+                        <page name="quotation" string="Quotations">
+                            <group>
+                                <group>
+                                    <field name="import_quotation"/>
+                                    <field name="export_quotation"/>
+                                    <field name="last_sync_import_quotation" string="Last Sync (Import)" readonly="1" />
+                                    <field name="last_sync_quotation" string="Last Sync (Export)" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_quotation"/>
+                                    <field name="auto_export_quotation"/>
+                                </group>
+                            </group>
+                            <button name="submit_quotation" string="Sync Quotation" invisible="not (import_quotation or export_quotation)" type="object" class="btn btn-primary mt-2"/>
+                        </page>
+                        <!-- ==================== Purchase Orders ==================== -->
+                        <page name="purchase" string="Purchase Orders">
+                            <group>
+                                <group>
+                                    <field name="purchase_import_use"/>
+                                    <field name="import_purchase"/>
+                                    <field name="export_purchase"/>
+                                    <field name="last_sync_import_purchase" string="Last Sync (Import)" readonly="1" />
+                                    <field name="last_sync_purchase" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_purchase"/>
+                                    <field name="auto_export_purchase"/>
+                                </group>
+                            </group>
+                            <button name="submit_purchase" string="Sync Purchase Orders" invisible="not (import_purchase or export_purchase)" type="object" class="btn btn-primary mt-2"/>
+                        </page>
+                        <!-- ==================== Accounting ==================== -->
+                        <page name="account" string="Accounting">
+
+                            <!--===================== Invoices =====================-->
+                            <h2 class="text-primary pb-2">Invoices</h2>
+                            <group name="invoice">
+                                <group>
+                                    <field name="import_invoice"/>
+                                    <field name="export_invoice"/>
+                                    <field name="last_sync_import_invoice" readonly="1" string="Last Sync (Import)" />
+                                    <field name="last_sync_invoice" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_invoice"/>
+                                    <field name="auto_export_invoice"/>
+                                </group>
+                            </group>
+                            <button name="submit_invoice" string="Sync Invoices" invisible="not (import_invoice or export_invoice)" type="object" class="btn btn-primary mt-2"/>
+                            <hr />
+
+                            <!--===================== Payments =====================-->
+                            <h2 class="text-primary pb-2">Payments</h2>
+                            <group name="payments">
+                                <group>
+                                    <field name="manage_payments"/>
+                                    <field name="manage_overpayment"/>
+                                    <field name="manage_prepayment"/>
+                                    <field name="last_sync_payments" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="sh_journal" required="manage_payments" options="{'no_create': True, 'no_open': True}" />
+                                    <field name="default_overpayment" required="manage_overpayment" options="{'no_create': True, 'no_open': True}" />
+                                    <field name="default_prepayment" required="manage_prepayment" options="{'no_create': True, 'no_open': True}" />
+                                </group>
+                            </group>
+                            <button name="import_xero_payments" string="Import Payments" invisible="not (manage_payments or manage_overpayment or manage_prepayment)" type="object" class="btn btn-primary mt-2"/>
+                            <hr />
+
+                            <!--===================== Credit Notes =====================-->
+                            <h2 class="text-primary pb-2">Credit Notes</h2>
+                            <group name="credit_note">
+                                <group>
+                                    <field name="import_credit_note" />
+                                    <field name="export_credit_note" />
+                                    <field name="last_sync_import_credit_note" readonly="1" string="Last Sync (Import)" />
+                                    <field name="last_sync_credit_note" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_credit_note" />
+                                    <field name="auto_export_credit_note" />
+                                </group>
+                            </group>
+                            <button name="submit_credit_note" string="Sync Credit Notes" invisible="not (import_credit_note or export_credit_note)" type="object" class="btn btn-primary mt-2" />
+                            <hr />
+
+                            <!--===================== Vendour Bills =====================-->
+                            <h2 class="text-primary pb-2">Vendour Bills</h2>
+                            <group name="bills">
+                                <group>
+                                    <field name="import_bill" />
+                                    <field name="export_bill" />
+                                    <field name="last_sync_import_bill" readonly="1" string="Last Sync (Import)" />
+                                    <field name="last_sync_bill" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_bill" />
+                                    <field name="auto_export_bill" />
+                                </group>
+                            </group>
+                            <button name="submit_bill" string="Sync Vendor Bills" invisible="not (import_bill or export_bill)" type="object" class="btn btn-primary mt-2" />
+                            <hr />
+
+                            <!--===================== Vendour Refunds =====================-->
+                            <h2 class="text-primary pb-2">Vendor Refunds</h2>
+                            <group name="refunds">
+                                <group>
+                                    <field name="import_refund" />
+                                    <field name="export_refund" />
+                                    <field name="last_sync_import_refund" readonly="1" string="Last Sync (Import)" />
+                                    <field name="last_sync_refund" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_refund" />
+                                    <field name="auto_export_refund" />
+                                </group>
+                            </group>
+                            <button name="submit_refund" string="Sync Refunds" invisible="not (import_refund or export_refund)" type="object" class="btn btn-primary mt-2" />
+                            <hr />
+
+                            <!--===================== Manaual Journal =====================-->
+                            <h2 class="text-primary pb-2">Manaual Journal</h2>
+                            <group name="manual_journal">
+                                <group>
+                                    <field name="import_journal" />
+                                    <field name="export_journal" />
+                                    <field name="default_manual_journal" invisible="not import_journal" required="import_journal" />
+                                    <field name="last_sync_journal" readonly="1" string="Last Sync (Export)" />
+                                </group>
+                                <group>
+                                    <field name="auto_import_journal" />
+                                    <field name="auto_export_journal" />
+                                    <!-- <field name="narration" /> -->
+                                </group>
+                            </group>
+                            <button name="submit_journal" string="Sync Journal" invisible="not (import_journal or export_journal)" type="object" class="btn btn-primary mt-2" />
+
+                        </page>
+                    </notebook>
+                    <!-- ==================== Log History ==================== -->
+                    <h2 class="text-primary text-center py-3">Log History</h2>
+                    <field name="xero_logger_id" readonly="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='sh_xero_configuration_tree' model='ir.ui.view'>
+        <field name="name">sh.xero.configuration.tree</field>
+        <field name="model">sh.xero.configuration</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+            </list>
+        </field>
+    </record>
+
+    <record id="sh_xero_configurtion_action" model="ir.actions.act_window">
+        <field name="name">Xero Connector</field>
+        <field name="res_model">sh.xero.configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Xero Credentials
+            </p>
+        </field>
+    </record>
+
+</odoo>

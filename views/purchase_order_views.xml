@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="xero_purchase_order_form" model="ir.ui.view">
+        <field name="name">xero.purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="xero" string="Xero">
+                    <group>
+                        <group>
+                            <field name="sh_xero_purchase_number" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="sh_xero_config" readonly="1" options="{'no_open': True}" />
+                            <field name="failure_reasons" readonly="1" invisible="not failure_reasons" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record id="xero_purchase_orders_exported_search_form" model="ir.ui.view">
+        <field name="name">Xero Purchase Orders Exported Search Form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <search>
+                <group name="group" string="Group By">
+                    <filter string="Xero Config" name="name" domain="[]" context="{'group_by' : 'sh_xero_config'}"/>
+                </group>
+            </search>
+            <xpath expr="//search/filter[@name='my_purchases']" position="after">
+                <filter string="Not Exported To Xero" name="xero_exported" domain="[('sh_xero_purchase_id', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Failed Log Views -->
+    <record id="xero_purchase_order_failed_tree" model='ir.ui.view'>
+        <field name="name">xero.purchase_order.failed.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="arch" type="xml">
+            <list string="Purchase Order">
+                <field name="name" string="Reference" readonly="1" decoration-bf="1"/>
+                <field name="partner_id" readonly="1"/>
+                <field name="date_order" invisible="not context.get('quotation_only', False) or state in ('purchase', 'done', 'cancel')" widget="remaining_days" optional="show"/>
+                <field name="state" optional="show" widget="badge" decoration-success="state == 'purchase' or state == 'done'" decoration-warning="state == 'to approve'" decoration-info="state == 'draft' or state == 'sent'"/>
+                <field name="invoice_status" optional="hide"/>
+                <field name="failure_reasons"/>
+            </list>
+        </field>
+    </record>
+</odoo>

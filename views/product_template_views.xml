@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_xero_product_config_selection" model="ir.ui.view">
+        <field name="name">sh.xero.product.config.selection</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//notebook" position="before">
+                <group class="pt-3">
+                    <group>
+                        <field name="sh_xero_config" options="{'no_open': True}" readonly="1" />
+                    </group>
+                    <group></group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+        <record id="Xero_product_exported_search_form" model="ir.ui.view">
+        <field name="name">Xero Product Exported Search Form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <search>
+                <group name="group" string="Group By">
+                    <filter string="Xero Config" name="name" domain="[]" context="{'group_by' : 'sh_xero_config'}"/>
+                </group>
+            </search>
+            <xpath expr="//search/filter[@name='inactive']" position="before">
+                <filter string="Not Exported To Xero" name="xero_exported" domain="[('sh_xero_product_id', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

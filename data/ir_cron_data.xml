@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="sh_xero_quotation_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Quotation From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_quotation()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_purchase_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Purchase From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_purchase()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_invoice_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Invoice From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_invoice()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_bill_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Bills From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_bills()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_credit_note_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Credit Note From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_credit_note()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_debit_note_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Debit Note From Queue</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model.import_records_from_queue_debit_note()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_journal_queue_cron" model="ir.cron">
+        <field name="name">Import Xero Journal From Queue</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._cron_import_journals_from_queue()</field>
+        <field name="state">code</field>
+    </record>
+
+    <record id="sh_xero_refresh_token_cron" model="ir.cron">
+        <field name="name">Refresh Token</field>
+        <field name="interval_number">25</field>
+        <field name="interval_type">minutes</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._cron_refresh_token()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_vendor_bill_cron" model="ir.cron">
+        <field name="name">Xero Vendor Bill</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_vendor_bill_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_tax_cron" model="ir.cron">
+        <field name="name">Xero Tax</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_tax_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_vendor_refund_cron" model="ir.cron">
+        <field name="name">Xero Vendor Refund</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_vendor_refund_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_quotation_cron" model="ir.cron">
+        <field name="name">Xero Quotation</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_quotation_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_purchase_cron" model="ir.cron">
+        <field name="name">Xero Purchase Orders</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_purchase_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_products_cron" model="ir.cron">
+        <field name="name">Xero Products</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_product_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_manual_journal_cron" model="ir.cron">
+        <field name="name">Xero Manual Journal</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_manual_journal_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_invoice_cron" model="ir.cron">
+        <field name="name">Xero Invoice</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_invoice_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_credit_note_cron" model="ir.cron">
+        <field name="name">Xero Credit Note</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_credit_note_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_contact_cron" model="ir.cron">
+        <field name="name">Xero Contact</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_contact_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_accounts_cron" model="ir.cron">
+        <field name="name">Xero Accounts</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_accounts_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sh_xero_payments_cron" model="ir.cron">
+        <field name="name">Xero Payments</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="sh_xero_connector.model_sh_xero_configuration" />
+        <field name="code">model._xero_payments_cron()</field>
+        <field name="state">code</field>
+        <field name="active" eval="True" />
+    </record>
+
+</odoo>

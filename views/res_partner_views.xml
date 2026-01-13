@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_xero_contact_selection_form" model="ir.ui.view">
+        <field name="name">sh.xero.contact.selection.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="sh_xero_config" readonly="1" />
+                <field name="main_person"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="xero_exported_partner_search_form" model="ir.ui.view">
+        <field name="name">Xero Config Exported Partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <search>
+                <group name="group" string="Group By">
+                    <filter string="Xero Config" name="name" context="{'group_by' : 'sh_xero_config'}"/>
+                </group>
+            </search>
+            <xpath expr="//filter[@name='type_person']" position="after">
+                <filter string="Not Exported To Xero" name="xero_not_exported" domain="[('sh_xero_contact_id', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Failed Log View -->
+    <record id='xero_res_partner_failed_tree' model='ir.ui.view'>
+        <field name="name">xero.res.partner.failed.tree</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <list string="Contacts">
+                <field name="display_name" string="Name"/>
+                <field name="parent_id" readonly="1"/>
+                <field name="failure_reasons"/>
+            </list>
+        </field>
+    </record>
+</odoo>

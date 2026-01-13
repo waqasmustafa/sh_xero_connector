@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sh_xero_log,access_sh_xero_log,model_sh_xero_log,base.group_user,1,1,1,1
+access_sh_xero_configuration,access_sh_xero_configuration,model_sh_xero_configuration,base.group_user,1,1,1,1
+sh_xero_connector.access_sh_xero_queue,access_sh_xero_queue,sh_xero_connector.model_sh_xero_queue,base.group_user,1,1,1,1
+sh_xero_connector.access_sh_xero_popup,access_sh_xero_popup,sh_xero_connector.model_sh_xero_popup,base.group_user,1,1,1,1
+sh_xero_connector.access_sh_xero_account_config,access_sh_xero_account_config,sh_xero_connector.model_sh_xero_account_config,base.group_user,1,1,1,1

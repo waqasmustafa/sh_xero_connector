@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_xero_tax_type_form" model="ir.ui.view">
+        <field name="name">sh.xero.tax.type.form</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='active']" position="after">
+                <field name="xero_tax_type"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="xero_tax_exported_search_form" model="ir.ui.view">
+        <field name="name">Xero Tax Exported Search Form</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_account_tax_search"/>
+        <field name="arch" type="xml">
+            <search>
+                <group name="group" string="Group By">
+                    <filter string="Xero Config" name="name" domain="[]" context="{'group_by' : 'sh_xero_config'}"/>
+                </group>
+            </search>
+            <xpath expr="//search/filter[@name='inactive']" position="after">
+                <filter string="Not Exported To Xero" name="xero_exported" domain="[('xero_tax_type', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- Failed Log View -->
+    <record id="xero_tax_failed_tree" model='ir.ui.view'>
+        <field name="name">xero.tax.failed.tree</field>
+        <field name="model">account.tax</field>
+        <field name="arch" type="xml">
+            <list string="Account Tax">
+                <field name="name"/>
+                <field name="failure_reason"/>
+            </list>
+        </field>
+    </record>
+</odoo>

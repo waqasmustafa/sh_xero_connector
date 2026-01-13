@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============== Xero Credentials ============== -->
+    <menuitem name="Xero Credentials" id="sh_xero_configuration_root" action="sh_xero_connector.sh_xero_configurtion_action" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+    <!-- ============== QUEUE ============== -->
+    <menuitem name="Queue" id="sh_xero_queue" parent="sh_xero_configuration_root" sequence="2" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+    <!-- Customers -->
+    <menuitem name="Customers" id="sh_xero_customers_menu" parent="sh_xero_queue" sequence="1" groups="sh_xero_connector.sh_xero_configuration_manager" />
+    <menuitem name="Quotation" id="sh_xero_quotation_queue" action="sh_xero_connector.sh_xero_quotation_queue_action" parent="sh_xero_customers_menu" sequence="1" groups="sh_xero_connector.sh_xero_configuration_manager" />
+    <menuitem name="Invoices" id="sh_xero_invoice_queue" action="sh_xero_connector.sh_xero_invoice_queue_action" parent="sh_xero_customers_menu" sequence="2" groups="sh_xero_connector.sh_xero_configuration_manager" />
+    <menuitem name="Credit Notes" id="sh_xero_credit_note_queue" action="sh_xero_connector.sh_xero_credit_note_queue_action" parent="sh_xero_customers_menu" sequence="3" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+    <!-- Vendors -->
+    <menuitem name="Vendors" id="sh_xero_vendors_menu" parent="sh_xero_queue" sequence="2"/>
+    <menuitem name="Purchase" id="sh_xero_purchase_queue" action="sh_xero_connector.sh_xero_purchase_queue_action" parent="sh_xero_vendors_menu" sequence="1" groups="sh_xero_connector.sh_xero_configuration_manager" />
+    <menuitem name="Bills" id="sh_xero_bills_queue" action="sh_xero_connector.sh_xero_bills_queue_action" parent="sh_xero_vendors_menu" sequence="2" groups="sh_xero_connector.sh_xero_configuration_manager" />
+    <menuitem name="Refunds/Debit Notes" id="sh_xero_debit_note_queue" action="sh_xero_connector.sh_xero_debit_note_queue_action" parent="sh_xero_vendors_menu" sequence="3" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+    <!-- Manual Journals -->
+    <menuitem name="Manual Journals" id="sh_xero_journal_queue" action="sh_xero_connector.sh_xero_journal_queue_action" parent="sh_xero_queue" sequence="3" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+    <!-- ============== Account Config ============== -->
+    <menuitem name="Account Config" id="sh_xero_account_config_menu" action="sh_xero_connector.sh_xero_account_config_action" parent="sh_xero_connector.sh_xero_configuration_root" groups="sh_xero_connector.sh_xero_configuration_manager" />
+
+</odoo>
