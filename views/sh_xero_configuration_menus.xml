@@ -2,7 +2,7 @@
 <odoo>
 
     <!-- ============== Xero Credentials ============== -->
-    <menuitem name="Xero Credentials" id="sh_xero_configuration_root" action="sh_xero_connector.sh_xero_configurtion_action" groups="sh_xero_connector.sh_xero_configuration_manager" web_icon="sh_xero_connector,static/description/icon.png" />
+    <menuitem name="Xero" id="sh_xero_configuration_root" action="sh_xero_connector.sh_xero_configurtion_action" groups="sh_xero_connector.sh_xero_configuration_manager" web_icon="sh_xero_connector,static/description/icon.png" />
 
     <!-- ============== QUEUE ============== -->
     <menuitem name="Queue" id="sh_xero_queue" parent="sh_xero_configuration_root" sequence="2" groups="sh_xero_connector.sh_xero_configuration_manager" />

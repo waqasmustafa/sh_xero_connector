@@ -41,7 +41,7 @@
         <field name="name">sh.xero.configuration.form</field>
         <field name="model">sh.xero.configuration</field>
         <field name="arch" type="xml">
-            <form string="Xero Credentials">
+            <form string="Xero">
                 <sheet>
                     <h1>
                         <field name="name" default_focus="1" placeholder="Name" required="1" readonly="received_code" />
@@ -282,7 +282,7 @@
     </record>
 
     <record id="sh_xero_configurtion_action" model="ir.actions.act_window">
-        <field name="name">Xero Connector</field>
+        <field name="name">Xero</field>
         <field name="res_model">sh.xero.configuration</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>
