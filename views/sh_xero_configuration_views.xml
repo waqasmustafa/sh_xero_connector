@@ -282,7 +282,7 @@
     </record>
 
     <record id="sh_xero_configurtion_action" model="ir.actions.act_window">
-        <field name="name">Xero</field>
+        <field name="name">Xero Connector</field>
         <field name="res_model">sh.xero.configuration</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">list,form</field>
