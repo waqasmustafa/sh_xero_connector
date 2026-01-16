@@ -41,7 +41,7 @@
         <field name="name">sh.xero.configuration.form</field>
         <field name="model">sh.xero.configuration</field>
         <field name="arch" type="xml">
-            <form string="Xero">
+            <form string="Xero Credentials">
                 <sheet>
                     <h1>
                         <field name="name" default_focus="1" placeholder="Name" required="1" readonly="received_code" />
